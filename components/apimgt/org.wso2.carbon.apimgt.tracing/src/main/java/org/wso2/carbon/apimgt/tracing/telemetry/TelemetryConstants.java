@@ -74,6 +74,10 @@ public class TelemetryConstants {
     static final String SAMPLER_PARENT_BASED = "parent_based";
     static final String OTEL_RESOURCE_ATTRIBUTE_CONFIG_KEYS_PREFIX = "OpenTelemetry.ResourceAttributes.";
     static final String OTEL_RESOURCE_ATTRIBUTES_ENVIRONMENT_VARIABLE_NAME = "OTEL_RESOURCE_ATTRIBUTES";
+    static final String OTLP_CONFIG_PROTOCOL = "OpenTelemetry.RemoteTracer.Protocol";
+    static final String DEFAULT_OTLP_CONFIG_PROTOCOL = "grpc";
+    static final String HTTP_PROTOCOL = "http";
+    static final String GRPC_PROTOCOL = "grpc";
 
     private TelemetryConstants() {
     }
