@@ -274,16 +274,17 @@ public class McpInitHandler extends AbstractHandler implements ManagedLifecycle 
     }
 
     /**
-     * Checks whether the MCP protocol revision declared by the client is one this gateway implements. A request
-     * which does not carry the MCP-Protocol-Version header is treated as supported, since the revision is then
-     * negotiated by the initialize handshake.
+     * Checks whether the MCP protocol revision declared by the client is one this gateway implements. Only a
+     * request which does not carry the MCP-Protocol-Version header at all is treated as supported, since the
+     * revision is then negotiated by the initialize handshake. A header carrying an empty or blank value declares
+     * no usable revision and is rejected like any other unsupported value.
      *
      * @param messageContext The message context of the request
-     * @return true if the declared revision is supported or no revision was declared, false otherwise
+     * @return true if the declared revision is supported or the header was absent, false otherwise
      */
     private boolean isSupportedMCPProtocolVersion(MessageContext messageContext) {
         String protocolVersion = getMCPProtocolVersionHeader(messageContext);
-        if (StringUtils.isBlank(protocolVersion)) {
+        if (protocolVersion == null) {
             return true;
         }
         boolean isSupported = APIConstants.MCP.SUPPORTED_PROTOCOL_VERSION_HEADERS.contains(protocolVersion.trim());
